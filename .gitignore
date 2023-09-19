@@ -1,3 +1,11 @@
+# Data files
+shp/
+dem/
+dsm/
+point_cloud/
+
+*.html
+
 # History files
 .Rhistory
 .Rapp.history

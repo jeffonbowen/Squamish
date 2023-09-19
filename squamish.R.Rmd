@@ -1,0 +1,40 @@
+---
+title: "Squamsih Landfill Expansion"
+output: html_notebook
+---
+
+
+```{r}
+# libraries
+library(tidyverse)
+library(sf)
+library(mapview)
+library(terra)
+library(raster)
+library(gridExtra)    # Helpers for grid graphics
+library(rayshader)
+
+library(ggpmisc)
+library(RCSF)
+library(ggpubr)
+
+library(lidR)
+library(rlas)
+```
+
+```{r}
+# Load footprint
+
+fp <- st_read(dsn = "shp/footprint.shp") %>% st_as_sfc()
+
+plot(fp)
+
+
+
+fp <- st_read(dsn = "squamish/footprint2.kml") %>% 
+  st_transform(crs = 26910)
+
+
+
+```
+
