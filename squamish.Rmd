@@ -1,0 +1,45 @@
+---
+title: "Squamish Landfill Expansion"
+output:
+  html_document:
+    df_print: paged
+editor_options:
+  chunk_output_type: inline
+---
+
+```{r include=FALSE}
+library(tidyverse)
+library(sf)
+library(mapview)
+library(tmap)
+```
+
+```{r include=FALSE}
+AOI <- st_read(dsn = "shp/AOI.shp")
+parcel <- st_read(dsn = "shp/footprint.shp")
+fp <- st_read(dsn = "shp/expansion_limit.shp") %>% st_as_sfc()
+top_of_bank <- st_read(dsn = "shp/Top_of_Bank.shp")
+wetlands <- st_read(dsn = "shp/Wetland.shp")
+DPA1 <- st_read(dsn = "shp/Environmental_Review_Areas_DPA1.shp")
+RAA <- st_read(dsn = "shp/Riparian_Assessment_Area__30m_.shp")
+
+```
+
+
+```{r echo=FALSE}
+tmap_mode("view")
+tmap_options(check.and.fix = TRUE)
+tm_basemap(leaflet::providers$Esri.WorldImagery) +
+tm_shape(fp) +
+  tm_lines()+
+tm_shape(top_of_bank) +
+  tm_lines("yellow", lwd = 2) +
+tm_shape(wetlands) +
+  tm_polygons("pink", alpha = 0.5) +
+tm_shape(parcel) +
+  tm_borders("purple", lwd = 2) +
+tm_shape(RAA) +
+  tm_borders("black", lwd = 2, lty = "dashed") +
+tm_shape(fp) +
+  tm_lines("red", lwd = 2)
+```
